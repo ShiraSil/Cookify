@@ -1,45 +1,88 @@
-Recipe Management System - Web API
+# Cookify – Web API
 
-A Web API built with ASP.NET Core for managing recipes, users, and ingredients, developed as a final project for the C# course. The system implements a clean layered architecture, full asynchronous processing, and database management via Entity Framework Core.
+A robust Web API built with **ASP.NET Core** for managing recipes, users, and ingredients, developed as a final project for the C# course. The system implements a clean 3-tier layered architecture, asynchronous programming (`async/await`), and relational database management via **Entity Framework Core**.
 
-Architecture & Project Structure
+---
 
-The project follows a standard 3-tier layered architecture to ensure clean separation of concerns and utilizes Dependency Injection throughout the application:
+## Architecture & Project Structure
 
-API Layer (Presentation): Contains the Controllers and endpoints. It handles API routing, handles incoming parameters (from Route, Query, and Body), and ensures appropriate HTTP status codes (such as 200 OK, 201 Created, 404 Not Found, and 204 No Content) are returned.
+The project follows a standard **3-tier layered architecture** to ensure separation of concerns, scalability, and maintainability, utilizing **Dependency Injection (DI)** throughout the entire application lifecycle:
 
-BL Layer (Business Logic): Implements the system's core features via Services. It processes incoming data, handles DTOs (Data Transfer Objects), and leverages AutoMapper to securely map entities without exposing the underlying database layer directly to the client.
+* **API Layer (Presentation):**
+  * Houses the ASP.NET Core Controllers and API endpoints.
+  * Handles routing, parameter binding (from Route, Query, and Body), and model validation.
+  * Ensures standardized HTTP response status codes (e.g., `200 OK`, `201 Created`, `204 No Content`, `400 Bad Request`, `404 Not Found`).
 
-DAL Layer (Data Access): The exclusive layer for database communication. It manages the DbContext, the core database entities, and Repository patterns working over Entity Framework Core.
+* **BL Layer (Business Logic):**
+  * Implements core business workflows through dedicated Services.
+  * Encapsulates data processing and isolates database entities using **DTOs (Data Transfer Objects)**.
+  * Leverages **AutoMapper** for clean and secure object-to-object mapping between domain models and DTOs.
 
-Database Entities & Relationships
+* **DAL Layer (Data Access):**
+  * Manages all database interactions using **Entity Framework Core**.
+  * Encapsulates the `DbContext`, entity configurations, and data persistence logic.
 
-The database schema includes 4 highly interconnected tables, fulfilling all business constraints and relational requirements:
+---
 
-Recipe: Represents a culinary recipe containing a title, instructions, ingredients, and preparation time. It maintains a relationship with the User who created it.
+## Database Schema & Relationships
 
-User: Represents the creator of the recipes, including their name and culinary specialty.
+The relational database model consists of interconnected entities designed to enforce integrity and relational constraints:
 
-Ingredient: Defines generic ingredients available within the system.
+* **Recipe:** Represents a culinary recipe (Title, Instructions, Preparation Time, Image/Metadata) and maintains a foreign key relationship with the `User` who authored it.
+* **User:** Represents the recipe author, including their profile details and culinary specialty.
+* **Ingredient:** Defines individual ingredients registered in the system.
+* **RecipeIngredient (Join Table):** Implements an explicit **Many-to-Many** relationship between `Recipe` and `Ingredient`, featuring an additional `Amount` column to represent the specific quantity per recipe.
 
-RecipeIngredient (Join Table - Many-to-Many): Explicitly bridges the Many-to-Many relationship between Recipes and Ingredients. It contains an additional field (Amount) to track the exact quantity of the ingredient used in that specific recipe.
+---
 
-Installation & Running Instructions
+## Tech Stack & Tools
 
-Prerequisites
+* **Backend Framework:** ASP.NET Core Web API (.NET)
+* **ORM:** Entity Framework Core
+* **Database:** Microsoft SQL Server
+* **Object Mapping:** AutoMapper
+* **API Documentation & Testing:** Swagger / OpenAPI
+* **IDE:** Visual Studio
 
-Visual Studio 2022 (or higher) with the .NET SDK installed.
+---
 
-SQL Server (LocalDB or SQL Express) running locally.
+## Getting Started
 
-Step-by-Step Setup
+### Prerequisites
 
-Clone the Repository: git clone https://github.com/NechamaSanders/FinalProject.git
+* [.NET SDK](https://dotnet.microsoft.com/download)
+* [Visual Studio](https://visualstudio.microsoft.com/) (with ASP.NET and web development workload)
+* [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server) (LocalDB, Express, or standard instance)
+* [SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 
-Configure Connection Strings: Navigate to the API project, open the appsettings.json file, and update the connection string inside the ConnectionStrings section to target your local database server instance. No credentials or connection strings are hardcoded in the codebase.
+---
 
-Database Creation: Run the attached .sql script or database backup file inside SQL Server Management Studio (SSMS) to instantiate the schema, tables, and constraints.
+## Installation & Setup
 
-Run the Project:Open the solution (.sln) file in Visual Studio, verify that the API project is set as the Startup Project, and press F5 to build and run the application.
+### 1. Clone the Repository
+Run the following command in your terminal:
+```bash
+git clone https://github.com/ShiraSil/Cookify.git
+cd Cookify
+```
 
-Interactive API Testing: Once launched, the browser will automatically load the Swagger UI page. This interactive interface displays all CRUD operations (GET, POST, PUT, DELETE) and allows you to dynamically test live HTTP requests directly from your browser.
+### 2. Configure Database Connection
+Open the API project folder, open `appsettings.json`, and set your connection string:
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=CookifyDb;Trusted_Connection=True;TrustServerCertificate=True;"
+}
+```
+
+### 3. Initialize the Database
+Execute the included `.sql` script inside SQL Server Management Studio (SSMS) to create the schema, tables, relationships, and initial seed data.
+
+### 4. Build & Run
+* Open `Cookify.sln` in Visual Studio.
+* Set the **API project** as the *Startup Project*.
+* Press `F5` (or `Ctrl + F5`) to build and start the server.
+
+### 5. Test the API
+Once running, the Swagger UI interface will open automatically:
+* URL: `https://localhost:PORT/swagger`
+* You can test all CRUD operations (`GET`, `POST`, `PUT`, `DELETE`) directly from the browser.
