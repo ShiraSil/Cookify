@@ -1,19 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System;
 using Cookify.Common;
-
-string currentDir = AppContext.BaseDirectory;
-while (currentDir != null && Directory.GetFiles(currentDir, "*.sln").Length == 0)
-{
-    currentDir = Directory.GetParent(currentDir)?.FullName;
-}
-if (currentDir != null)
-{
-    string dbPath = Path.Combine(currentDir, "DB");
-    Directory.CreateDirectory(dbPath);
-    AppDomain.CurrentDomain.SetData("DataDirectory", dbPath);
-}
 
 var builder = WebApplication.CreateBuilder(args);
 
