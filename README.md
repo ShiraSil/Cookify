@@ -70,7 +70,7 @@ cd Cookify
 Open the API project folder, open `appsettings.json`, and set your connection string:
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=CookifyDb;Trusted_Connection=True;TrustServerCertificate=True;"
+  "DefaultConnection": "Server=<YOUR_SERVER_NAME>;Database=CookifyDB;Trusted_Connection=True;TrustServerCertificate=True;"
 }
 ```
 
