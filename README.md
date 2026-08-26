@@ -44,6 +44,13 @@ The relational database model consists of interconnected entities designed to en
 * **API Documentation & Testing:** Swagger / OpenAPI
 * **IDE:** Visual Studio
 
+![ASP.NET Core](https://img.shields.io/badge/.NET_Core-8.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-12-239120?style=flat-square&logo=csharp&logoColor=white)
+![EF Core](https://img.shields.io/badge/ORM-EF_Core-68217A?style=flat-square&logo=nuget&logoColor=white)
+![SQL Server](https://img.shields.io/badge/Database-SQL_Server-CC292B?style=flat-square&logo=microsoftsqlserver&logoColor=white)
+![Swagger](https://img.shields.io/badge/API_Docs-Swagger-85EA2D?style=flat-square&logo=swagger&logoColor=black)
+![Architecture](https://img.shields.io/badge/Architecture-3--Tier-blue?style=flat-square)
+
 ---
 
 ## Getting Started
